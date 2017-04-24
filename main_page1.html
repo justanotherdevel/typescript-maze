@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>KNOT-OUT</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="KNOT-OUT"/>
+        <meta name="keywords" content="jquery, horizontal, scrolling, scroll, smooth"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    </head>
+    <style>
+        html, body{
+        font-family: 'Lato', sans-serif;
+        font-size: 40px;
+        }
+        a{
+            color:#fff;
+            text-decoration:none;
+        }
+        a:hover{
+            text-decoration:underline;
+        }
+        span.reference{
+            position:fixed;
+            left:10px;
+            bottom:10px;
+            font-size:13px;
+            font-weight:bold;
+        }
+        span.reference a{
+            color:#fff;
+            text-shadow:1px 1px 1px #000;
+            padding-right:20px;
+        }
+        span.reference a:hover{
+            color:#ddd;
+            text-decoration:none;
+        }
+        *{
+             margin:0;
+            padding:0;
+        }
+        body{
+            background:#000;/*
+            font-family:Georgia;*/
+/*            font-size: 34px;*/
+            /*font-style: italic*/;
+            letter-spacing:-1px;
+        }
+        .section{
+            margin:0px;
+            height:4000px;
+            width:100%;
+            float:left;
+            text-shadow:1px 1px 2px #f0f0f0;
+        }   
+        .section h2{
+            margin:50px 0px 30px 50px;
+        }
+        .section p{
+            margin:20px 0px 0px 50px;
+            width:600px;
+        }
+        .black{
+            color:#fff;
+            background:#000 url(../images/black_vert.jpg) repeat-x bottom left;
+        }
+        .white{
+            color:#000;
+            background:#fff url(../images/white_vert.jpg) repeat-x bottom left;
+        }
+
+        .section ul{
+            list-style:none;
+            margin:20px 0px 0px 550px;
+        }
+        .black ul li{
+            float:left;
+            padding:5px;
+            margin:5px;
+            color:#aaa;
+        }
+        .black ul li a{
+            display:block;
+            color:#f0f0f0;
+        }
+        .black ul li a:hover{
+            text-decoration:none;
+            color:#fff;
+        }
+        .white ul li{
+            float:left;
+            padding:5px;
+            margin:5px;
+            color:#aaa;
+        }
+        .white ul li a{
+            display:block;
+            color:#222;
+        }
+        .white ul li a:hover{
+            text-decoration:none;
+            color:#000;
+        }
+
+    </style>
+    <body>
+        <!-- <div>
+            <span class="reference">
+                <a href="http://tympanus.net/codrops/2010/06/02/smooth-vertical-or-horizontal-page-scrolling-with-jquery/">© Codrops</a>
+                <a href="index_vertical.html"></a>
+            </span>
+        </div> -->
+
+        <div class="section black" id="main-page">
+            <h2>KNOT- OUT</h2>
+            <p>
+                MY Spectre around me night and day
+                Like a wild beast guards my way;
+                My Emanation far within
+                Weeps incessantly for my sin.
+            </p>
+            <ul class="nav">
+                <li>1</li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section white" id="about">
+            <h2>About</h2>
+            <p>
+                ‘A fathomless and boundless deep,
+                There we wander, there we weep;
+                On the hungry craving wind
+                My Spectre follows thee behind.
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li>2</li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section black" id="rules">
+            <h2>Rules & Regulations</h2>
+            <p>
+                ‘He scents thy footsteps in the snow
+                Wheresoever thou dost go,
+                Thro’ the wintry hail and rain.
+                When wilt thou return again?
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li>3</li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section white" id="programming">
+            <h2>Programming</h2>
+            <p>
+                ‘A fathomless and boundless deep,
+                There we wander, there we weep;
+                On the hungry craving wind
+                My Spectre follows thee behind.
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li>4</li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section black" id="algorithms">
+            <h2>Algorithms</h2>
+            <p>
+                ‘He scents thy footsteps in the snow
+                Wheresoever thou dost go,
+                Thro’ the wintry hail and rain.
+                When wilt thou return again?
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li>5</li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section white" id="future">
+            <h2>Future Aspect</h2>
+            <p>
+                ‘A fathomless and boundless deep,
+                There we wander, there we weep;
+                On the hungry craving wind
+                My Spectre follows thee behind.
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li>6</li>
+                <li><a href="#thanks">7</a></li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section black" id="thanks">
+            <h2>Thanks</h2>
+            <p>
+                ‘He scents thy footsteps in the snow
+                Wheresoever thou dost go,
+                Thro’ the wintry hail and rain.
+                When wilt thou return again?
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li>7</li>
+                <li><a href="#coders">8</a></li>
+            </ul>
+        </div>
+        <div class="section white" id="coders" name="coders">
+            <a id="coders" name="coders"></a><h2>Coders</h2>
+            <p>
+                ‘A fathomless and boundless deep,
+                There we wander, there we weep;
+                On the hungry craving wind
+                My Spectre follows thee behind.
+
+            </p>
+            <ul class="nav">
+                <li><a href="#main-page" onclick="resetHref();">1</a></li>
+                <li><a href="#about">2</a></li>
+                <li><a href="#rules">3</a></li>
+                <li><a href="#programming">4</a></li>
+                <li><a href="#algorithms">5</a></li>
+                <li><a href="#future">6</a></li>
+                <li><a href="#thanks">7</a></li>
+                <li>8</li>
+            </ul>
+        </div>
+
+
+        <!-- The JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>      
+        <script type="text/javascript" src="jquery.easing.1.3.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('ul.nav a').bind('click',function(event){
+                    var $anchor = $(this);
+                    /*
+                    if you want to use one of the easing effects:
+                    $('html, body').stop().animate({
+                        scrollLeft: $($anchor.attr('href')).offset().left
+                    }, 1500,'easeInOutExpo');
+                     */
+                    $('html, body').stop().animate({
+                        scrollLeft: $($anchor.attr('href')).offset().left
+                    }, 1000);
+                    event.preventDefault();
+                });
+            });
+
+            function resetHref() {
+                location.hash = '';
+            }
+
+        </script>
+    </body>
+</html>
