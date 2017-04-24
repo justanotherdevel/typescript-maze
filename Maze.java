@@ -3,6 +3,7 @@ import  java.util.Random;
 public class Maze {
 	protected int maze[][];
 	protected int nVertices;
+	//Update connectionPos and noPos where noPos stands for the no. of pos.
 	protected int connectionPos[][];
 	protected int noPos;
 	private int minConnection;
@@ -52,6 +53,6 @@ public class Maze {
 			}
 		}
 		path[src] = -1;
-		return (dist[dest] == Integer.MAX_VALUE);
+		return (dist[dest] != Integer.MAX_VALUE);
 	} 
 }

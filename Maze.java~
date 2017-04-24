@@ -35,7 +35,7 @@ public class Maze {
 
 	public boolean dijkstra (int src, int dest, int path[]) {
 		int dist[] = new int[nVertices];
-		boolean sptSet[] = new int[nVertices];
+		boolean sptSet[] = new boolean[nVertices];
 		for (int i = 0; i < this.nVertices; i++) {
 			dist[i] = Integer.MAX_VALUE;
 			sptSet[i] = false;
