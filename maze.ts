@@ -23,7 +23,7 @@ class Maze {
 	public extractWeight (i:number, j:number) {
 		return this.maze[i][j]; 
 	}
-	public dijkstra (source:number, destination:number) {
+	public dijkstra (sRow:number, sColumn:number, dRow:number, dColumn:number) {
 		//Apply dijkstra and check if destination is reachable.
 		//Return true or false accordingly.
 	}
