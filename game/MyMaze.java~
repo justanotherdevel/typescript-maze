@@ -560,7 +560,7 @@ public class MyMaze extends JPanel implements ActionListener{
 
   // draw the maze
   public void updateGrid() {
-      char backChar = ' ', wallChar = 'x', cellChar = ' ', pathChar = '*';
+      char backChar = ' ', wallChar = 'x', cellChar = ' ', pathChar = '-';
       // fill background
       for (int x = 0; x < gridDimensionX; x ++) {
           for (int y = 0; y < gridDimensionY; y ++) {
