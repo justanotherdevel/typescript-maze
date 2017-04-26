@@ -1,13 +1,8 @@
-
-
-
-
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
-import java.util.*;
-import java.awt.*;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -28,8 +23,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JFrame;
-
-
 
 public class MyMaze extends JPanel implements ActionListener{
   private int dimensionX, dimensionY; // dimension of maze
@@ -61,8 +54,10 @@ public class MyMaze extends JPanel implements ActionListener{
   private int[] dx, dy;
   private int currentSpeed = 3;
   private short[] screenData;
-
-
+  private boolean firstGrid = true;
+  private boolean showPath = false;
+  private int Score = 0;
+  
   // initialize with x and y the same
   public MyMaze(int aDimension) {
       // Initialize
@@ -74,23 +69,21 @@ public class MyMaze extends JPanel implements ActionListener{
   }
 
   public void initMyMaze(){
-    addKeyListener(new TAdapter());
     setFocusable(true);
     setBackground(Color.black);
     setDoubleBuffered(true);
-
   }
+ 
   private void initVariables(){
     mazeColor= new Color(5, 100, 5);
     dx = new int[4];
     dy = new int[4];
     screenData = new short[N_BLOCKS * N_BLOCKS];
-
   }
+
   @Override
     public void addNotify() {
         super.addNotify();
-
         initGame();
     }
     //  private void doAnim() {
@@ -109,84 +102,61 @@ public class MyMaze extends JPanel implements ActionListener{
     private void playGame(Graphics2D g2d) {
 
         if (dying) {
-
             death();
-
         } else {
-
             movePacman();
             drawPacman(g2d);
             // checkMaze();
         }
     }
-
-
-
-
-
-
-     private void showIntroScreen(Graphics2D g2d) {
-
+    
+    private void showIntroScreen(Graphics2D g2d) {
         g2d.setColor(new Color(0, 32, 48));
         g2d.fillRect(50, SCREEN_SIZE / 2 - 30, SCREEN_SIZE - 100, 50);
         g2d.setColor(Color.white);
         g2d.drawRect(50, SCREEN_SIZE / 2 - 30, SCREEN_SIZE - 100, 50);
-
         String s = "Press s to start.";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = this.getFontMetrics(small);
-
         g2d.setColor(Color.white);
         g2d.setFont(small);
         g2d.drawString(s, (SCREEN_SIZE - metr.stringWidth(s)) / 2, SCREEN_SIZE / 2);
     }
     private void drawScore(Graphics2D g) {
-
         int i;
         String s;
-
         g.setFont(smallFont);
         g.setColor(new Color(96, 128, 255));
         s = "Score: " + score;
         g.drawString(s, SCREEN_SIZE / 2 + 96, SCREEN_SIZE + 16);
-
         for (i = 0; i < pacsLeft; i++) {
             g.drawImage(pacman3left, i * 28 + 8, SCREEN_SIZE + 1, this);
         }
     }
     private void death() {
-
         pacsLeft--;
-
         if (pacsLeft == 0) {
             inGame = false;
         }
-
         continueLevel();
     }
 
-
     private void movePacman() {
-
         int pos;
         short ch;
-
         if (req_dx == -pacmand_x && req_dy == -pacmand_y) {
             pacmand_x = req_dx;
             pacmand_y = req_dy;
             view_dx = pacmand_x;
             view_dy = pacmand_y;
         }
-
         if (pacman_x % BLOCK_SIZE == 0 && pacman_y % BLOCK_SIZE == 0) {
             pos = pacman_x / BLOCK_SIZE + N_BLOCKS * (int) (pacman_y / BLOCK_SIZE);
             ch = screenData[pos];
-
             if ((ch & 16) != 0) {
                 screenData[pos] = (short) (ch & 15);
                 score++;
             }
-
             if (req_dx != 0 || req_dy != 0) {
                 if (!((req_dx == -1 && req_dy == 0 && (ch & 1) != 0)
                         || (req_dx == 1 && req_dy == 0 && (ch & 4) != 0)
@@ -198,7 +168,6 @@ public class MyMaze extends JPanel implements ActionListener{
                     view_dy = pacmand_y;
                 }
             }
-
             // Check for standstill
             if ((pacmand_x == -1 && pacmand_y == 0 && (ch & 1) != 0)
                     || (pacmand_x == 1 && pacmand_y == 0 && (ch & 4) != 0)
@@ -212,10 +181,8 @@ public class MyMaze extends JPanel implements ActionListener{
         pacman_y = pacman_y + PACMAN_SPEED * pacmand_y;
     }
 
-
 // PACMAN DRAWINGS STARTING FROM HERE. WE CAN CLEARLY SEE THE PACMAN MOVING IN FROM HERE.
     private void drawPacman(Graphics2D g2d) {
-
         if (view_dx == -1) {
             drawPacmanLeft(g2d);
         } else if (view_dx == 1) {
@@ -227,7 +194,6 @@ public class MyMaze extends JPanel implements ActionListener{
         }
     }
     private void drawPacmanUp(Graphics2D g2d) {
-
         switch (pacmanAnimPos) {
             case 1:
                 g2d.drawImage(pacman2up, pacman_x + 1, pacman_y + 1, this);
@@ -245,7 +211,6 @@ public class MyMaze extends JPanel implements ActionListener{
     }
 
     private void drawPacmanDown(Graphics2D g2d) {
-
         switch (pacmanAnimPos) {
             case 1:
                 g2d.drawImage(pacman2down, pacman_x + 1, pacman_y + 1, this);
@@ -263,7 +228,6 @@ public class MyMaze extends JPanel implements ActionListener{
     }
 
     private void drawPacmanLeft(Graphics2D g2d) {
-
         switch (pacmanAnimPos) {
             case 1:
                 g2d.drawImage(pacman2left, pacman_x + 1, pacman_y + 1, this);
@@ -281,7 +245,6 @@ public class MyMaze extends JPanel implements ActionListener{
     }
 
     private void drawPacmanRight(Graphics2D g2d) {
-
         switch (pacmanAnimPos) {
             case 1:
                 g2d.drawImage(pacman2right, pacman_x + 1, pacman_y + 1, this);
@@ -297,17 +260,6 @@ public class MyMaze extends JPanel implements ActionListener{
                 break;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
   // constructor
   public MyMaze(int xDimension, int yDimension) {
       dimensionX = xDimension;
@@ -500,6 +452,7 @@ public class MyMaze extends JPanel implements ActionListener{
                       projDist < neighbor.projectedDist) { // better path
                   neighbor.parent = current;
                   neighbor.visited = true;
+		  Score++;
                   neighbor.projectedDist = projDist;
                   neighbor.travelled = current.travelled + 1;
                   if (!openCells.contains(neighbor))
@@ -535,13 +488,6 @@ public class MyMaze extends JPanel implements ActionListener{
       //         initLevel();
       //     }
       // }
-
-
-
-
-
-
-
       //create path from end to beginning
       Cell backtracking = endCell;
       backtracking.inPath = true;
@@ -559,7 +505,11 @@ public class MyMaze extends JPanel implements ActionListener{
 
   // draw the maze
   public void updateGrid() {
-      char backChar = ' ', wallChar = 'x', cellChar = ' ', pathChar = '*';
+      char backChar = ' ', wallChar = 'x', cellChar = ' ', pathChar = ' ';
+      if(showPath){
+	      pathChar = '*';
+	      showPath = false;
+      }
       // fill background
       for (int x = 0; x < gridDimensionX; x ++) {
           for (int y = 0; y < gridDimensionY; y ++) {
@@ -615,6 +565,7 @@ public class MyMaze extends JPanel implements ActionListener{
               }
           }
       }
+      grid[gridDimensionX-1][gridDimensionY-2] = ' ';
   }
   // simply prints the map
   public void draw() {
@@ -623,7 +574,10 @@ public class MyMaze extends JPanel implements ActionListener{
   // forms a meaningful representation
   @Override
   public String toString() {
-      updateGrid();
+      if (firstGrid){
+	      updateGrid();
+	      firstGrid = false;
+      }
       String output = "";
       for (int y = 0; y < gridDimensionY; y++) {
           for (int x = 0; x < gridDimensionX; x++) {
@@ -638,7 +592,83 @@ public class MyMaze extends JPanel implements ActionListener{
   public static void main(String[] args) {
       MyMaze maze = new MyMaze(20);
       maze.solve();
-      maze.draw();
+      int score = 0;
+      char path = '*';
+      int currentX = 1;
+      int currentY = 0;
+      boolean flag = false;
+      Scanner sc = new Scanner(System.in).useDelimiter("\\s*");
+      while(true){
+	      	System.out.print("\033[H\033[2J");		//Clears the console 
+    		System.out.flush(); 
+      		if (currentX == (maze.gridDimensionX - 1) && currentY == (maze.gridDimensionY - 2)){
+			System.out.println("You win\n You Score: " + (score - maze.Score));
+			break;
+	      	}
+		maze.draw();
+		char a = sc.next().charAt(0);
+		switch (a) {
+			case 'w':
+				if (currentY -1 >= 0 && (maze.grid[currentX][currentY-1] == ' ' || maze.grid[currentX][currentY-1] == path)){
+					currentY = currentY - 1;
+					if (maze.grid[currentX][currentY] == path){
+						maze.grid[currentX][currentY] = '&';
+					}else{
+						maze.grid[currentX][currentY] = path;
+					}
+				}
+				score++;
+				break;
+			case 'a':
+				if (currentX - 1 >= 0 && (maze.grid[currentX-1][currentY] == ' ' || maze.grid[currentX-1][currentY] == path )){
+					currentX = currentX - 1;
+					if (maze.grid[currentX][currentY] == path){
+						maze.grid[currentX][currentY] = '&';
+					}else{
+						maze.grid[currentX][currentY] = path;
+					}
+				}
+				score++;
+				break;
+			case 's':
+				if (currentY+1 < maze.dimensionY && maze.grid[currentX][currentY+1] == ' ' || (maze.grid[currentX][currentY+1] == path)){
+					currentY = currentY + 1;
+					if (maze.grid[currentX][currentY] == path){
+						maze.grid[currentX][currentY] = '&';
+					}else{
+						maze.grid[currentX][currentY] = path;
+					}
+				}
+				score++;
+				break;
+			case 'd':
+				if (currentX+1 < maze.dimensionX && (maze.grid[currentX+1][currentY] == ' ' || maze.grid[currentX+1][currentY] == path)){
+					currentX = currentX + 1;
+					if (maze.grid[currentX][currentY] == path){
+						maze.grid[currentX][currentY] = '&';
+					}else{
+						maze.grid[currentX][currentY] = path;
+					}
+				}
+				score++;
+				break;
+			case 'z':
+				maze.firstGrid = true;
+				maze.showPath = true;
+				System.out.print("\033[H\033[2J");		//Clears the console 
+    				System.out.flush(); 
+				System.out.println("\t\t\t\tYOU LOSE!!!");
+				sc.next();
+				System.out.print("\033[H\033[2J");		//Clears the console 
+    				System.out.flush(); 
+				maze.draw();
+				flag = true;
+				break;
+			default:
+		}
+		if (flag)
+			break;
+      }
   }
 
  private void initGame() {
