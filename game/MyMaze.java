@@ -565,6 +565,7 @@ public class MyMaze extends JPanel implements ActionListener{
               }
           }
       }
+      grid[1][0] = ' ';
       grid[gridDimensionX-1][gridDimensionY-2] = ' ';
   }
   // simply prints the map
@@ -608,7 +609,7 @@ public class MyMaze extends JPanel implements ActionListener{
 		maze.draw();
 		char a = sc.next().charAt(0);
 		switch (a) {
-			case 'w':
+			case 'A':
 				if (currentY -1 >= 0 && (maze.grid[currentX][currentY-1] == ' ' || maze.grid[currentX][currentY-1] == path)){
 					currentY = currentY - 1;
 					if (maze.grid[currentX][currentY] == path){
@@ -619,7 +620,7 @@ public class MyMaze extends JPanel implements ActionListener{
 				}
 				score++;
 				break;
-			case 'a':
+			case 'D':
 				if (currentX - 1 >= 0 && (maze.grid[currentX-1][currentY] == ' ' || maze.grid[currentX-1][currentY] == path )){
 					currentX = currentX - 1;
 					if (maze.grid[currentX][currentY] == path){
@@ -630,7 +631,7 @@ public class MyMaze extends JPanel implements ActionListener{
 				}
 				score++;
 				break;
-			case 's':
+			case 'B':
 				if (currentY+1 < maze.dimensionY && maze.grid[currentX][currentY+1] == ' ' || (maze.grid[currentX][currentY+1] == path)){
 					currentY = currentY + 1;
 					if (maze.grid[currentX][currentY] == path){
@@ -641,7 +642,7 @@ public class MyMaze extends JPanel implements ActionListener{
 				}
 				score++;
 				break;
-			case 'd':
+			case 'C':
 				if (currentX+1 < maze.dimensionX && (maze.grid[currentX+1][currentY] == ' ' || maze.grid[currentX+1][currentY] == path)){
 					currentX = currentX + 1;
 					if (maze.grid[currentX][currentY] == path){
